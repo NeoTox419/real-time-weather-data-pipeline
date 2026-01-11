@@ -1,0 +1,6 @@
+requests
+pandas
+minio
+sqlalchemy
+psycopg2-binary
+python-dotenv
