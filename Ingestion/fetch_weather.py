@@ -2,6 +2,7 @@ import os
 import requests
 from dotenv import load_dotenv
 from datetime import datetime
+from storage.minio_upload import upload_raw_weather
 
 # Load environment variables
 load_dotenv()
@@ -27,4 +28,4 @@ def fetch_weather():
 
 if __name__ == "__main__":
     weather_data = fetch_weather()
-    print(weather_data)
+    upload_raw_weather(weather_data, CITY)
