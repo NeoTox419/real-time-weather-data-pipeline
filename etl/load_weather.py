@@ -17,23 +17,26 @@ engine = create_engine(DB_URL)
 
 def load_weather(transformed_data: dict):
     query = text("""
-        INSERT INTO weather_fact (
-            city,
-            temperature_c,
-            humidity,
-            wind_speed,
-            weather_timestamp,
-            ingested_at
-        )
-        VALUES (
-            :city,
-            :temperature_c,
-            :humidity,
-            :wind_speed,
-            :weather_timestamp,
-            :ingested_at
-        )
-    """)
+    INSERT INTO weather_fact (
+        city,
+        temperature_c,
+        humidity,
+        wind_speed,
+        weather_timestamp,
+        ingested_at,
+        source_object
+    )
+    VALUES (
+        :city,
+        :temperature_c,
+        :humidity,
+        :wind_speed,
+        :weather_timestamp,
+        :ingested_at,
+        :source_object
+    )
+    ON CONFLICT (source_object) DO NOTHING
+""")
 
     with engine.begin() as conn:
         conn.execute(query, transformed_data)

@@ -10,3 +10,6 @@ CREATE TABLE IF NOT EXISTS weather_fact (
 
 CREATE INDEX IF NOT EXISTS idx_weather_city_time
 ON weather_fact (city, weather_timestamp);
+
+ALTER TABLE weather_fact
+ADD COLUMN IF NOT EXISTS source_object TEXT UNIQUE;
